@@ -1,0 +1,13 @@
+@font-face {
+ font-family: 'Allura';
+ font-style: normal;
+ font-weight: 400;
+ src: url(Allura-Regular.otf);
+}
+
+@font-face {
+ font-family: 'TolkienCyr';
+ font-style: normal;
+ font-weight: 400;
+ src: url(ofont.ru_Tolkien.ttf);
+}

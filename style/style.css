@@ -1,0 +1,95 @@
+@import url(../fonts/fonts.css);
+
+.body {
+ width: 100vw;
+ height: 100vh;
+ margin: 0;
+ background-color: black;
+ font-family: 'Allura', 'TolkienCyr', sans-serif;
+ color: white;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.form {
+ margin-top: 100px;
+ font-family: 'Allura', 'TolkienCyr', sans-serif;
+}
+
+.title {
+ font-size: 100px;
+ margin: 0;
+}
+
+.name {
+ padding: 0;
+ width: 400px;
+ min-height: 50px;
+ font-family: 'Allura', 'TolkienCyr', sans-serif;
+ font-size: 30px;
+ color: green;
+}
+
+
+
+.save {
+ padding: 0;
+ width: 100px;
+ height: 40px;
+ background-color: papayawhip;
+ border-radius: 5px;
+ font-family: 'Allura', 'TolkienCyr', sans-serif;
+ font-size: 15px;
+}
+
+.container {
+ background-color: darkgray;
+
+}
+
+.todo-list {
+ margin: 20px 0 0 0;
+ border: 1px solid white;
+ background-color: black;
+ display: flex;
+ justify-content: space-between;
+}
+
+.case {
+ display: inline-block;
+ margin: 0;
+ font-size: 25px;
+}
+
+.wrapper {
+ width: 50px;
+ justify-content: space-between;
+ display: flex;
+ margin-top: 8px;
+}
+
+.trash {
+ padding: 0;
+ background-image: url(../foto//button-trash.svg);
+ max-width: 18px;
+ width: 100%;
+ height: 19px;
+ border: none;
+ background-color: initial;
+ padding: 0;
+ transition: opacity 1s ease;
+
+}
+
+.done {
+ padding: 0;
+ background-image: url(../foto/icons8-checkmark-20.png);
+ max-width: 18px;
+ width: 100%;
+ height: 19px;
+ border: none;
+ background-color: black;
+ padding: 0;
+ transition: opacity 1s ease;
+}

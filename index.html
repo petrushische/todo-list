@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+ <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style/style.css" />
+  <title>todo-list</title>
+ </head>
+ <body class="body">
+  <form class="form">
+   <h1 class="title">Список дел</h1>
+   <input
+    type="text"
+    name="todo-list"
+    class="name"
+    placeholder="Введите свое дело"
+    required
+   />
+   <button class="save">Сохранить</button>
+   <div class="container"></div>
+  </form>
+  <template class="template">
+   <div class="todo-list">
+    <p class="case"></p>
+    <div class="wrapper">
+     <button class="done" type="button"></button>
+     <button class="trash" type="button"></button>
+    </div>
+   </div>
+  </template>
+  <script src="script/script.js"></script>
+ </body>
+</html>
