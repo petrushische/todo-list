@@ -20,23 +20,42 @@
 .title {
  font-size: 100px;
  margin: 0;
+ text-align: center;
+}
+
+.full-done {
+ padding: 0;
+ width: 50px;
+ height: 50px;
+ background-color: white;
+ border: none;
+ position: absolute;
+ top: 245px;
+ left: 635px;
+ display: none;
+}
+
+.full-done-visible {
+ display: inline-block;
 }
 
 .name {
  padding: 0;
- width: 400px;
+ padding-left: 50px;
+ width: 554px;
  min-height: 50px;
  font-family: 'Allura', 'TolkienCyr', sans-serif;
  font-size: 30px;
- color: green;
+ color: black;
 }
 
 
 
 .save {
+ border: none;
  padding: 0;
  width: 100px;
- height: 40px;
+ height: 58px;
  background-color: papayawhip;
  border-radius: 5px;
  font-family: 'Allura', 'TolkienCyr', sans-serif;
@@ -44,12 +63,16 @@
 }
 
 .container {
- background-color: darkgray;
 
+ background-color: darkgray;
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ position: relative;
 }
 
-.todo-list {
- margin: 20px 0 0 0;
+.todo-li {
+ margin-top: 20px;
  border: 1px solid white;
  background-color: black;
  display: flex;
@@ -93,4 +116,56 @@
  background-color: black;
  padding: 0;
  transition: opacity 1s ease;
+}
+
+.check-delo {
+ text-decoration: line-through;
+}
+
+.button-wrapper {
+ display: none;
+ justify-content: center;
+ width: 712px;
+ height: 40px;
+ background-color: darkgray;
+ position: relative;
+}
+
+.button-wrapper-visible {
+ display: flex;
+}
+
+.button-conteiner {
+
+ height: 20px;
+ margin-top: 20px;
+ width: 70px;
+ padding: 0;
+ border: none;
+ margin-right: 5px;
+ background: none;
+ align-self: center;
+ color: black;
+}
+
+.button-conteiner-all {
+ background-color: white;
+}
+
+
+.button-conteiner:hover {
+ background-color: white;
+}
+
+.count {
+
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 20px;
+ margin: 0;
+ position: absolute;
+ top: 20px;
+ left: 40px;
+ width: 10%;
+ height: 20px;
+ color: black;
 }

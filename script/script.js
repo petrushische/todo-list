@@ -1,36 +1,55 @@
-const todoList = ['Проснуться в 7:00',
- 'Умыться и позавтракать',
- 'Погулять с собакой',
- 'Собраться в Универ'
-]
-
 const container = document.querySelector('.container');
-
 
 const template = document.querySelector('.template').content;
 
+const buttonWrapper = document.querySelector('.button-wrapper');
+
+const count = document.querySelector('.count');
+
+const fullDone = document.querySelector('.full-done');
+
+
+
+function showButton() {
+ let counter = container.children.length;
+ if (counter > 0) {
+  buttonWrapper.classList.add('button-wrapper-visible')
+  count.textContent = `${counter} items`
+  fullDone.classList.add('full-done-visible')
+
+ } else {
+  buttonWrapper.classList.remove('button-wrapper-visible')
+  count.textContent = ''
+  fullDone.classList.remove('full-done-visible')
+ }
+}
+
+
+
 function renderTemplate(item) {
- const element = template.querySelector('.todo-list').cloneNode(true);
+ const element = template.querySelector('.todo-li').cloneNode(true);
  const paragr = element.querySelector('.case');
  paragr.textContent = item;
  const trash = element.querySelector('.trash');
  trash.addEventListener('click', (evt) => {
-  evt.target.closest('.todo-list').remove();
+  evt.target.closest('.todo-li').remove();
+  showButton()
  })
  const done = element.querySelector('.done');
  done.addEventListener('click', () => {
-  paragr.setAttribute('style', 'text-decoration: line-through;')
+  paragr.classList.toggle('check-delo')
  })
- return element;
+
+ return element
 }
 
 function render(item) {
  container.append(renderTemplate(item))
+
 }
 
-todoList.forEach((element) => {
- render(element);
-})
+
+
 
 const form = document.querySelector('.form');
 const input = form.querySelector('.name');
@@ -38,4 +57,7 @@ form.addEventListener('submit', (evt) => {
  evt.preventDefault();
  render(input.value)
  form.reset();
+ showButton()
 })
+
+
