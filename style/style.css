@@ -13,6 +13,7 @@
 }
 
 .form {
+ position: relative;
  margin-top: 100px;
  font-family: 'Allura', 'TolkienCyr', sans-serif;
 }
@@ -25,17 +26,43 @@
 
 .full-done {
  padding: 0;
+
+ position: relative;
+ margin: 0;
+ padding: 0;
  width: 50px;
  height: 50px;
  background-color: white;
  border: none;
  position: absolute;
- top: 245px;
- left: 635px;
+ top: 145px;
+ left: 300pxpx;
  display: none;
 }
 
+.full-done::before {
+ border: 1px solid black;
+ width: 100%;
+ height: 100%;
+ content: '';
+ position: absolute;
+ top: 0;
+ left: 0;
+ background-color: rgba(194, 182, 149, 0.89);
+}
+
+.full-done:checked::before {
+ width: 0%;
+ height: 0%;
+ content: '';
+ position: absolute;
+ top: 0;
+ left: 0;
+ color: black;
+}
+
 .full-done-visible {
+ cursor: pointer;
  display: inline-block;
 }
 
@@ -72,6 +99,7 @@
 }
 
 .todo-li {
+ width: 710px;
  margin-top: 20px;
  border: 1px solid white;
  background-color: black;
@@ -83,10 +111,15 @@
  display: inline-block;
  margin: 0;
  font-size: 25px;
+ width: 100%;
+}
+
+.case:hover {
+ cursor: pointer;
 }
 
 .wrapper {
- width: 50px;
+ width: 70px;
  justify-content: space-between;
  display: flex;
  margin-top: 8px;
@@ -107,8 +140,8 @@
 }
 
 .done {
+ margin: 0;
  padding: 0;
- background-image: url(../foto/icons8-checkmark-20.png);
  max-width: 18px;
  width: 100%;
  height: 19px;
@@ -121,6 +154,8 @@
 .check-delo {
  text-decoration: line-through;
 }
+
+
 
 .button-wrapper {
  display: none;
@@ -152,13 +187,21 @@
  background-color: white;
 }
 
+.button-conteiner-clear {
+ display: none;
+ position: absolute;
+ left: 600px;
+}
+
+.button-conteiner-clear-active {
+ display: block;
+}
 
 .button-conteiner:hover {
  background-color: white;
 }
 
 .count {
-
  font-family: Arial, Helvetica, sans-serif;
  font-size: 20px;
  margin: 0;
@@ -168,4 +211,36 @@
  width: 10%;
  height: 20px;
  color: black;
+}
+
+.todo-change {
+ border: none;
+ padding: 0;
+ margin: 0;
+ width: 710px;
+ height: 33px;
+ position: absolute;
+ display: none;
+}
+
+.todo-change-visible {
+ display: inline-block;
+}
+
+.input-save {
+ border: none;
+ padding: 0;
+ width: 90px;
+ height: 33px;
+ background-color: papayawhip;
+ border-radius: 5px;
+ font-family: 'Allura', 'TolkienCyr', sans-serif;
+ font-size: 15px;
+ position: absolute;
+ left: 622px;
+ display: none;
+}
+
+.input-save-visible {
+ display: inline-block;
 }

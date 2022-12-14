@@ -1,3 +1,4 @@
+
 const container = document.querySelector('.container');
 
 const template = document.querySelector('.template').content;
@@ -8,15 +9,31 @@ const count = document.querySelector('.count');
 
 const fullDone = document.querySelector('.full-done');
 
+const todoList = container.children
 
+const buttonClear = buttonWrapper.querySelector('.button-conteiner-clear')
+
+function countTodoli() {
+ let countLi = todoList.length
+ return countLi
+}
+function clear() {
+ let counter = 0;
+ Array.from(todoList).forEach((elem) => {
+  elem.classList.contains('check-delo') ? counter += 1 : false;
+ })
+ if (counter >= 1) {
+  buttonClear.classList.add('button-conteiner-clear-active')
+ } else {
+  buttonClear.classList.remove('button-conteiner-clear-active')
+ }
+}
 
 function showButton() {
- let counter = container.children.length;
- if (counter > 0) {
+ if (countTodoli() > 0) {
   buttonWrapper.classList.add('button-wrapper-visible')
-  count.textContent = `${counter} items`
+  count.textContent = `${countTodoli()} item`
   fullDone.classList.add('full-done-visible')
-
  } else {
   buttonWrapper.classList.remove('button-wrapper-visible')
   count.textContent = ''
@@ -28,28 +45,57 @@ function showButton() {
 
 function renderTemplate(item) {
  const element = template.querySelector('.todo-li').cloneNode(true);
+
  const paragr = element.querySelector('.case');
+ paragr.id = item
  paragr.textContent = item;
+
+ const inputChange = element.querySelector('.todo-change')
+
+ const buttonInput = element.querySelector('.input-save')
+ buttonInput.addEventListener('click', () => {
+  paragr.textContent = inputChange.value
+  inputChange.classList.remove('todo-change-visible')
+  buttonInput.classList.remove('input-save-visible')
+  if (inputChange.value === '') {
+   element.remove()
+  }
+  showButton()
+ })
+
  const trash = element.querySelector('.trash');
  trash.addEventListener('click', (evt) => {
   evt.target.closest('.todo-li').remove();
-  showButton()
+  showButton();
+  countTodoli()
  })
+
  const done = element.querySelector('.done');
  done.addEventListener('click', () => {
-  paragr.classList.toggle('check-delo')
+  if (done.checked) {
+   done.closest('.todo-li').classList.add('check-delo');
+
+  } else {
+   done.closest('.todo-li').classList.remove('check-delo');
+  }
+  clear();
  })
 
+ inputChange.addEventListener('keyup', (evt) => {
+  if (evt.keyCode === 13) {
+   buttonInput.click()
+  }
+ })
+ element.addEventListener('dblclick', () => {
+  inputChange.classList.add('todo-change-visible')
+  buttonInput.classList.add('input-save-visible')
+  inputChange.value = paragr.textContent
+ })
  return element
 }
-
 function render(item) {
  container.append(renderTemplate(item))
-
 }
-
-
-
 
 const form = document.querySelector('.form');
 const input = form.querySelector('.name');
@@ -57,7 +103,76 @@ form.addEventListener('submit', (evt) => {
  evt.preventDefault();
  render(input.value)
  form.reset();
+ showButton();
+ countTodoli()
+})
+
+// большая блять кнопка ебать его рот
+
+
+fullDone.addEventListener('change', () => {
+ Array.from(todoList).forEach((element) => {
+  const check = element.querySelector('.done')
+  if (fullDone.checked === true) {
+   check.addEventListener('click', () => {
+    if (check.checked === true) {
+     fullDone.checked = true
+    } else if (check.checked === false) {
+     fullDone.checked = false
+    }
+   })
+   if (check.checked === true) {
+
+   } else if (check.checked === false) {
+    check.checked = true
+    check.closest('.todo-li').classList.add('check-delo')
+   }
+  } else {
+
+   check.checked = false
+   check.closest('.todo-li').classList.remove('check-delo')
+  }
+
+ })
+ clear();
+})
+
+
+
+
+buttonClear.addEventListener('click', () => {
+ Array.from(todoList).forEach((elem) => {
+  elem.classList.contains('check-delo') ? elem.remove() : buttonClear.classList.remove('button-conteiner-clear-active')
+ })
+ if (countTodoli() === 0) {
+  buttonWrapper.classList.remove('button-wrapper-visible')
+  count.textContent = ''
+  fullDone.classList.remove('full-done-visible')
+  buttonClear.classList.remove('button-conteiner-clear-active')
+ }
  showButton()
 })
 
 
+
+
+/*fullDone.addEventListener('click', () => {
+
+ Array.from(todoList).forEach((element) => {
+  const check = element.querySelector('.done')
+  if (fullDone.checked === true) {
+   buttonClear.classList.add('button-conteiner-clear-active')
+   if (check.checked === true) {
+   } else if (check.checked === false) {
+    check.checked = true
+    check.closest('.todo-li').classList.add('check-delo')
+   }
+  } else {
+   fullDone.checked = false
+   check.checked = false
+   check.closest('.todo-li').classList.remove('check-delo')
+  }
+
+ })
+ clear();
+})*/

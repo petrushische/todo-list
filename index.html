@@ -10,7 +10,7 @@
  <body class="body">
   <form class="form">
    <h1 class="title">Список дел</h1>
-   <button class="full-done" type="button">&or;</button>
+   <input class="full-done" type="checkbox"></input>
    <input
     type="text"
     name="todo-list"
@@ -19,7 +19,8 @@
     required
    />
    <button class="save">Сохранить</button>
-   <div class="container"></div>
+  </form>
+  <div class="container"></div>
    <div class="button-wrapper">
     <p class="count"></p>
     <button class="button-conteiner button-conteiner-all" type="button">
@@ -31,17 +32,26 @@
     <button class="button-conteiner button-conteiner-completed" type="button">
      Completed
     </button>
+    <button class="button-conteiner button-conteiner-clear" type="button">
+     Сlear
+    </button>
    </div>
-  </form>
   <template class="template">
    <div class="todo-li">
-    <p class="case"></p>
+    <p class="case" id=""></p>
     <div class="wrapper">
-     <button class="done" type="button"></button>
+     <input class="done" type="checkbox"></input>
      <button class="trash" type="button"></button>
     </div>
+    <input type="text" class="todo-change" placeholder="Отредактируйте"></input>
+    <button class="input-save" type="button">Сохранить</button>
    </div>
   </template>
   <script src="script/script.js"></script>
  </body>
 </html>
+
+
+
+
+
