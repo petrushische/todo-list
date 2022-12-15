@@ -17,22 +17,24 @@ function countTodoli() {
  let countLi = todoList.length
  return countLi
 }
+
 function clear() {
- let counter = 0;
+ let counterCheckDelo = 0;
  Array.from(todoList).forEach((elem) => {
-  elem.classList.contains('check-delo') ? counter += 1 : false;
+  elem.classList.contains('check-delo') ? counterCheckDelo += 1 : false;
  })
- if (counter >= 1) {
+ if (counterCheckDelo >= 1) {
   buttonClear.classList.add('button-conteiner-clear-active')
  } else {
   buttonClear.classList.remove('button-conteiner-clear-active')
  }
+ count.textContent = `${countTodoli() - counterCheckDelo} item`
 }
 
 function showButton() {
  if (countTodoli() > 0) {
   buttonWrapper.classList.add('button-wrapper-visible')
-  count.textContent = `${countTodoli()} item`
+  count.textContent = `${countTodoli()}item`
   fullDone.classList.add('full-done-visible')
  } else {
   buttonWrapper.classList.remove('button-wrapper-visible')
@@ -44,10 +46,10 @@ function showButton() {
 function checkCheked(elem) {
  if (elem.checked) {
   elem.closest('.todo-li').classList.add('check-delo');
-
  } else {
   elem.closest('.todo-li').classList.remove('check-delo');
  }
+
 }
 
 function renderTemplate(item) {
@@ -111,7 +113,7 @@ form.addEventListener('submit', (evt) => {
 
 // 
 
-function xxx(evt) {
+function CallBack(evt) {
  if (evt.target.checked === false) {
   fullDone.checked = false
  } else {
@@ -119,16 +121,14 @@ function xxx(evt) {
 }
 
 fullDone.addEventListener('click', () => {
- let f = [];
  Array.from(todoList).forEach((element) => {
-  f.push(element)
   const check = element.querySelector('.done')
   if (fullDone.checked === true) {
    check.checked = true;
    checkCheked(check);
-   check.addEventListener('click', xxx)
+   check.addEventListener('click', CallBack)
   } else if (fullDone.checked === false) {
-   check.removeEventListener('click', xxx)
+   check.removeEventListener('click', CallBack)
    check.checked = false;
    checkCheked(check);
   }
@@ -151,27 +151,3 @@ buttonClear.addEventListener('click', () => {
  }
  showButton()
 })
-
-
-
-
-/*fullDone.addEventListener('click', () => {
-
- Array.from(todoList).forEach((element) => {
-  const check = element.querySelector('.done')
-  if (fullDone.checked === true) {
-   buttonClear.classList.add('button-conteiner-clear-active')
-   if (check.checked === true) {
-   } else if (check.checked === false) {
-    check.checked = true
-    check.closest('.todo-li').classList.add('check-delo')
-   }
-  } else {
-   fullDone.checked = false
-   check.checked = false
-   check.closest('.todo-li').classList.remove('check-delo')
-  }
-
- })
- clear();
-})*/
