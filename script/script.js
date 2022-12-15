@@ -41,7 +41,14 @@ function showButton() {
  }
 }
 
+function checkCheked(elem) {
+ if (elem.checked) {
+  elem.closest('.todo-li').classList.add('check-delo');
 
+ } else {
+  elem.closest('.todo-li').classList.remove('check-delo');
+ }
+}
 
 function renderTemplate(item) {
  const element = template.querySelector('.todo-li').cloneNode(true);
@@ -72,12 +79,7 @@ function renderTemplate(item) {
 
  const done = element.querySelector('.done');
  done.addEventListener('click', () => {
-  if (done.checked) {
-   done.closest('.todo-li').classList.add('check-delo');
-
-  } else {
-   done.closest('.todo-li').classList.remove('check-delo');
-  }
+  checkCheked(done)
   clear();
  })
 
@@ -107,32 +109,29 @@ form.addEventListener('submit', (evt) => {
  countTodoli()
 })
 
-// большая блять кнопка ебать его рот
+// 
 
+function xxx(evt) {
+ if (evt.target.checked === false) {
+  fullDone.checked = false
+ } else {
+ }
+}
 
-fullDone.addEventListener('change', () => {
+fullDone.addEventListener('click', () => {
+ let f = [];
  Array.from(todoList).forEach((element) => {
+  f.push(element)
   const check = element.querySelector('.done')
   if (fullDone.checked === true) {
-   check.addEventListener('click', () => {
-    if (check.checked === true) {
-     fullDone.checked = true
-    } else if (check.checked === false) {
-     fullDone.checked = false
-    }
-   })
-   if (check.checked === true) {
-
-   } else if (check.checked === false) {
-    check.checked = true
-    check.closest('.todo-li').classList.add('check-delo')
-   }
-  } else {
-
-   check.checked = false
-   check.closest('.todo-li').classList.remove('check-delo')
+   check.checked = true;
+   checkCheked(check);
+   check.addEventListener('click', xxx)
+  } else if (fullDone.checked === false) {
+   check.removeEventListener('click', xxx)
+   check.checked = false;
+   checkCheked(check);
   }
-
  })
  clear();
 })
