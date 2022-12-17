@@ -1,5 +1,6 @@
-
-const container = document.querySelector('.container');
+const container = document.querySelector('.container-all');
+const containerActiv = document.querySelector('.container-active');
+const containerComplete = document.querySelector('.container-completed');
 
 const template = document.querySelector('.template').content;
 
@@ -12,6 +13,47 @@ const fullDone = document.querySelector('.full-done');
 const todoList = container.children
 
 const buttonClear = buttonWrapper.querySelector('.button-conteiner-clear')
+
+const buttonDefault = document.querySelector('.button-conteiner-all');
+const buttonActive = document.querySelector('.button-conteiner-active');
+const buttonComplet = document.querySelector('.button-conteiner-completed');
+
+
+function renderCompleted() {
+ Array.from(todoList).forEach((elem) => {
+  if (window.location.href === 'http://127.0.0.1:5500/index.html#/') {
+   elem.style = 'display:flex'
+  } else if (window.location.href === 'http://127.0.0.1:5500/index.html#/active') {
+   elem.classList.contains('check-delo') ? elem.style = 'display:none' : elem.style = 'display:flex';
+  } else if (window.location.href === 'http://127.0.0.1:5500/index.html#/completed') {
+   elem.classList.contains('check-delo') ? elem.style = 'display:flex' : elem.style = 'display:none'
+  }
+ })
+}
+
+setInterval(function () {
+ if (window.location.href === 'http://127.0.0.1:5500/index.html#/') {
+  buttonDefault.classList.add('button-conteiner-on')
+  buttonActive.classList.remove('button-conteiner-on')
+  buttonComplet.classList.remove('button-conteiner-on')
+  console.log(window.location.href)
+ } else if (window.location.href === 'http://127.0.0.1:5500/index.html#/active') {
+  buttonActive.classList.add('button-conteiner-on')
+  buttonDefault.classList.remove('button-conteiner-on')
+  buttonComplet.classList.remove('button-conteiner-on')
+  console.log(window.location.href)
+ } else if (window.location.href === 'http://127.0.0.1:5500/index.html#/completed') {
+  buttonComplet.classList.add('button-conteiner-on')
+  buttonActive.classList.remove('button-conteiner-on')
+  buttonDefault.classList.remove('button-conteiner-on')
+  console.log(window.location.href)
+ }
+ renderCompleted()
+}, 10);
+
+
+
+
 
 function countTodoli() {
  let countLi = todoList.length
@@ -81,8 +123,9 @@ function renderTemplate(item) {
 
  const done = element.querySelector('.done');
  done.addEventListener('click', () => {
-  checkCheked(done)
+  checkCheked(done);
   clear();
+
  })
 
  inputChange.addEventListener('keyup', (evt) => {
@@ -97,6 +140,8 @@ function renderTemplate(item) {
  })
  return element
 }
+
+
 function render(item) {
  container.append(renderTemplate(item))
 }
@@ -125,13 +170,13 @@ fullDone.addEventListener('click', () => {
   const check = element.querySelector('.done')
   if (fullDone.checked === true) {
    check.checked = true;
-   checkCheked(check);
    check.addEventListener('click', CallBack)
   } else if (fullDone.checked === false) {
    check.removeEventListener('click', CallBack)
    check.checked = false;
-   checkCheked(check);
   }
+  checkCheked(check);
+
  })
  clear();
 })

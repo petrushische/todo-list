@@ -90,12 +90,19 @@
 }
 
 .container {
-
  background-color: darkgray;
  display: flex;
  flex-direction: column;
  justify-content: space-between;
  position: relative;
+}
+
+.container-active {
+ display: none;
+}
+
+.container-completed {
+ display: none;
 }
 
 .todo-li {
@@ -171,7 +178,10 @@
 }
 
 .button-conteiner {
-
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 14px;
+ text-align: center;
+ text-decoration: none;
  height: 20px;
  margin-top: 20px;
  width: 70px;
@@ -183,11 +193,29 @@
  color: black;
 }
 
-.button-conteiner-all {
+
+.button-conteiner-on {
+ background-color: white;
+}
+
+.button-conteiner:hover {
  background-color: white;
 }
 
 .button-conteiner-clear {
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 14px;
+ text-align: center;
+ text-decoration: none;
+ height: 20px;
+ margin-top: 20px;
+ width: 70px;
+ padding: 0;
+ border: none;
+ margin-right: 5px;
+ background: none;
+ align-self: center;
+ color: black;
  display: none;
  position: absolute;
  left: 600px;
@@ -197,7 +225,7 @@
  display: block;
 }
 
-.button-conteiner:hover {
+.button-conteiner-clear:hover {
  background-color: white;
 }
 
