@@ -9,10 +9,8 @@ const buttonClear = buttonWrapper.querySelector('.button-conteiner-clear')
 const buttonDefault = document.querySelector('.button-conteiner-all');
 const buttonActive = document.querySelector('.button-conteiner-active');
 const buttonComplet = document.querySelector('.button-conteiner-completed');
-// localStorage
 
 
-/*
 // Фильтры
 function filters() {
  Array.from(todoList).forEach((elem) => {
@@ -42,41 +40,138 @@ setInterval(function () {
  }
  filters()
 }, 100);
-*/
+
+let tasks = [];
+
+if (localStorage.getItem('tasks')) {
+ tasks = JSON.parse(localStorage.getItem('tasks'))
+}
+tasks.forEach((elem) => {
+ function renderLi(elem) {
+  const element = template.querySelector('.todo-li').cloneNode(true);
+  element.id = elem.id
+
+  const paragr = element.querySelector('.case');
+  paragr.textContent = elem.text;
+  const inputChange = element.querySelector('.todo-change')
+  const buttonInput = element.querySelector('.input-save')
+  buttonInput.addEventListener('click', () => {
+   paragr.textContent = inputChange.value
+   elem.text = inputChange.value
+   inputChange.classList.remove('todo-change-visible')
+   buttonInput.classList.remove('input-save-visible')
+   if (inputChange.value === '') {
+    element.remove()
+    tasks = tasks.filter((el) => el.id != element.id)
+   }
+   SavelocalStorage()
+  })
+
+  const trash = element.querySelector('.trash');
+  trash.addEventListener('click', (evt) => {
+   tasks = tasks.filter((elem) => elem.id != element.id)
+   evt.target.closest('.todo-li').remove();
+   showButton();
+   countTodoli();
+   SavelocalStorage();
+  })
+
+  const done = element.querySelector('.done');
+  elem.dane ? done.checked = true : done.checked = false;
+  checkCheked(done);
+  clear();
+  fullCheckTodo();
+  done.addEventListener('click', () => {
+   if (elem.dane === false) {
+    elem.dane = true
+   } else {
+    elem.dane = false
+   }
+   checkCheked(done);
+   clear()
+   fullCheckTodo();
+   SavelocalStorage()
+  })
+
+  inputChange.addEventListener('keyup', (evt) => {
+   if (evt.keyCode === 13) {
+    buttonInput.click()
+   }
+  })
+  element.addEventListener('dblclick', () => {
+   inputChange.classList.add('todo-change-visible')
+   buttonInput.classList.add('input-save-visible')
+   inputChange.value = paragr.textContent
+  })
+
+  return element
+ }
+
+ container.append(renderLi(elem))
+ showButton();
+ clear();
+})
+
+
 
 // Создание задачи
 function renderTemplate(item) {
  const element = template.querySelector('.todo-li').cloneNode(true);
+
+ const newtasks = {
+  id: Date.now(),
+  text: item,
+  dane: false
+ }
+ tasks.push(newtasks)
+ SavelocalStorage()
+
+
+ element.id = newtasks.id
+
  const paragr = element.querySelector('.case');
- paragr.id = Date.now()
- paragr.textContent = item;
+ paragr.textContent = newtasks.text;
  const inputChange = element.querySelector('.todo-change')
  const buttonInput = element.querySelector('.input-save')
  buttonInput.addEventListener('click', () => {
   paragr.textContent = inputChange.value
+  newtasks.text = inputChange.value
   inputChange.classList.remove('todo-change-visible')
   buttonInput.classList.remove('input-save-visible')
   if (inputChange.value === '') {
    element.remove()
+   tasks = tasks.filter((el) => el.id != element.id)
+
   }
+  SavelocalStorage()
   showButton();
  })
 
  const trash = element.querySelector('.trash');
  trash.addEventListener('click', (evt) => {
+  /* const index = tasks.findIndex((el) => el.id === Number(element.id))
+   tasks.splice(index, 1)*/
+  tasks = tasks.filter((elem) => elem.id != element.id)
   evt.target.closest('.todo-li').remove();
   showButton();
   countTodoli();
-
+  SavelocalStorage();
  })
 
  const done = element.querySelector('.done');
+ newtasks.dane ? done.checked = true : done.checked = false
  done.addEventListener('click', () => {
+  if (newtasks.dane === false) {
+   newtasks.dane = true
+  } else {
+   newtasks.dane = false
+  }
   checkCheked(done);
   clear();
   fullCheckTodo();
-
+  SavelocalStorage()
  })
+
 
  inputChange.addEventListener('keyup', (evt) => {
   if (evt.keyCode === 13) {
@@ -120,8 +215,9 @@ function clear() {
   elem.classList.contains('check-delo') ? counterCheckDelo += 1 : false;
   buttonClear.addEventListener('click', () => {
    elem.classList.contains('check-delo') ? elem.remove() : buttonClear.classList.remove('button-conteiner-clear-active')
+   tasks = tasks.filter((elem) => elem.dane === false)
    showButton();
-
+   SavelocalStorage();
   })
  })
  counterCheckDelo >= 1 ? buttonClear.classList.add('button-conteiner-clear-active') : buttonClear.classList.remove('button-conteiner-clear-active');
@@ -152,29 +248,36 @@ function checkCheked(elem) {
 
 // Чекбокс отметки всех задач
 fullDone.addEventListener('click', () => {
- Array.from(todoList).forEach((element) => {
-  const check = element.querySelector('.done')
+ const done = Array.from(document.querySelectorAll('.done'))
+ tasks.forEach((elem) => {
   if (fullDone.checked === true) {
-   check.checked = true;
+   elem.dane = true
   } else if (fullDone.checked === false) {
-   check.checked = false;
+   elem.dane = false
   }
-  checkCheked(check);
  })
- fullCheckTodo();
+ done.forEach((elem) => {
+  if (fullDone.checked === true) {
+   elem.checked = true
+  } else if (fullDone.checked === false) {
+   elem.checked = false
+  }
+  checkCheked(elem);
+ })
  clear();
-
+ SavelocalStorage();
 })
 
 // Все задачи отмечены/ничего не отмечено
 function fullCheckTodo() {
- let countCompletTodo = 0;
- Array.from(todoList).forEach((el) => {
-  el.classList.contains('check-delo') ? countCompletTodo += 1 : false
+ let count = 0
+ tasks.forEach((elem) => {
+  elem.dane === true ? count += 1 : null
  })
- if (countCompletTodo !== countTodoli()) {
-  fullDone.checked = false
- } else {
-  fullDone.checked = true
- }
+ count === tasks.length ? fullDone.checked = true : fullDone.checked = false
+}
+
+
+function SavelocalStorage() {
+ localStorage.setItem('tasks', JSON.stringify(tasks))
 }
