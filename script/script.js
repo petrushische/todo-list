@@ -14,32 +14,32 @@ const buttonComplet = document.querySelector('.button-conteiner-completed');
 // Фильтры
 function filters() {
  Array.from(todoList).forEach((elem) => {
-  if (window.location.href === 'http://127.0.0.1:5500/index.html#/') {
+  if (window.location.hash === '#/') {
    elem.style = 'display:flex'
-  } else if (window.location.href === 'http://127.0.0.1:5500/index.html#/active') {
+  } else if (window.location.hash === '#/active') {
    elem.classList.contains('check-delo') ? elem.style = 'display:none' : elem.style = 'display:flex';
-  } else if (window.location.href === 'http://127.0.0.1:5500/index.html#/completed') {
+  } else if (window.location.hash === '#/completed') {
    elem.classList.contains('check-delo') ? elem.style = 'display:flex' : elem.style = 'display:none'
   }
  })
 }
 
 setInterval(function () {
- if (window.location.href === 'http://127.0.0.1:5500/index.html#/') {
+ if (window.location.hash === '#/') {
   buttonDefault.classList.add('button-conteiner-on')
   buttonActive.classList.remove('button-conteiner-on')
   buttonComplet.classList.remove('button-conteiner-on')
- } else if (window.location.href === 'http://127.0.0.1:5500/index.html#/active') {
+ } else if (window.location.hash === '#/active') {
   buttonActive.classList.add('button-conteiner-on')
   buttonDefault.classList.remove('button-conteiner-on')
   buttonComplet.classList.remove('button-conteiner-on')
- } else if (window.location.href === 'http://127.0.0.1:5500/index.html#/completed') {
+ } else if (window.location.hash === '#/completed') {
   buttonComplet.classList.add('button-conteiner-on')
   buttonActive.classList.remove('button-conteiner-on')
   buttonDefault.classList.remove('button-conteiner-on')
  }
  filters()
-}, 50);
+}, 100);
 
 let tasks = [];
 
