@@ -39,7 +39,7 @@ setInterval(function () {
   buttonDefault.classList.remove('button-conteiner-on')
  }
  filters()
-}, 100);
+}, 50);
 
 let tasks = [];
 
@@ -60,6 +60,7 @@ tasks.forEach((elem) => {
    elem.text = inputChange.value
    inputChange.classList.remove('todo-change-visible')
    buttonInput.classList.remove('input-save-visible')
+   paragr.style = 'display:visible'
    if (inputChange.value === '') {
     element.remove()
     tasks = tasks.filter((el) => el.id != element.id)
@@ -99,6 +100,7 @@ tasks.forEach((elem) => {
    }
   })
   element.addEventListener('dblclick', () => {
+   paragr.style = 'display:none'
    inputChange.classList.add('todo-change-visible')
    buttonInput.classList.add('input-save-visible')
    inputChange.value = paragr.textContent
@@ -138,6 +140,7 @@ function renderTemplate(item) {
   newtasks.text = inputChange.value
   inputChange.classList.remove('todo-change-visible')
   buttonInput.classList.remove('input-save-visible')
+  paragr.style = 'display:visible'
   if (inputChange.value === '') {
    element.remove()
    tasks = tasks.filter((el) => el.id != element.id)
@@ -179,6 +182,7 @@ function renderTemplate(item) {
   }
  })
  element.addEventListener('dblclick', () => {
+  paragr.style = 'display:none'
   inputChange.classList.add('todo-change-visible')
   buttonInput.classList.add('input-save-visible')
   inputChange.value = paragr.textContent
