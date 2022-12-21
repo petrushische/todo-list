@@ -1,29 +1,31 @@
 @import url(../fonts/fonts.css);
 
-.body {
- width: 100vw;
- height: 100%;
- margin: 0;
+html {
+ box-sizing: border-box;
  background-color: black;
- font-family: 'Allura', 'TolkienCyr', sans-serif;
- color: white;
- display: flex;
- flex-direction: column;
- align-items: center;
 }
 
-.form {
- position: relative;
- margin-top: 100px;
+.body {
+ padding-top: 75px;
+ width: 100%;
+ height: 100vh;
+ margin: 0 auto;
  font-family: 'Allura', 'TolkienCyr', sans-serif;
- display: flex;
- flex-direction: column;
- align-items: center;
+ color: white;
+}
+
+
+
+.form {
+ width: 712px;
+ position: relative;
+ font-family: 'Allura', 'TolkienCyr', sans-serif;
+ margin: 0 auto;
 }
 
 @media screen and (max-width: 750px) {
  form {
-  max-width: 450px;
+  max-width: 430px;
   width: 100%;
  }
 }
@@ -36,6 +38,7 @@
 }
 
 .title {
+ width: 712px;
  font-size: 100px;
  margin: 0;
  text-align: center;
@@ -44,7 +47,7 @@
 @media screen and (max-width: 750px) {
  .title {
   font-size: 80px;
-  width: 100%;
+  width: 430px;
  }
 }
 
@@ -71,7 +74,7 @@
 @media screen and (max-width: 750px) {
  .full-done {
   top: 118px;
-  left: 15px;
+  left: 5px;
  }
 }
 
@@ -118,7 +121,7 @@
  border: none;
  padding: 0;
  padding-left: 50px;
- width: 660px;
+ width: 662px;
  min-height: 50px;
  font-family: 'Allura', 'TolkienCyr', sans-serif;
  font-size: 30px;
@@ -162,12 +165,14 @@
 
 
 .container {
+ box-sizing: border-box;
  background-color: darkgray;
  display: flex;
  flex-direction: column;
  justify-content: space-between;
  position: relative;
  width: 712px;
+ margin: 0 auto;
 }
 
 @media screen and (max-width:750px) {
@@ -281,6 +286,7 @@
  height: 40px;
  background-color: darkgray;
  position: relative;
+ margin: 0 auto;
 }
 
 @media screen and (max-width:750px) {
@@ -395,6 +401,7 @@
 
 @media screen and (max-width:450px) {
  .count {
+  width: 45px;
   font-size: 12px;
   left: 10px;
  }
