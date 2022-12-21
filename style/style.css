@@ -85,6 +85,7 @@ html {
  }
 }
 
+
 .full-done::before {
  padding: 0;
  outline: 1px solid black;
@@ -92,12 +93,10 @@ html {
  height: 100%;
  content: '';
  position: absolute;
-
+ top: 0;
+ left: 0;
  background-color: rgba(194, 182, 149, 0.89);
 }
-
-
-
 
 .full-done:checked::before {
  border: none;
@@ -108,7 +107,6 @@ html {
  position: absolute;
  top: 0;
  left: 0;
-
  color: black;
 }
 
